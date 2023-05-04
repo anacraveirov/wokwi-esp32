@@ -1,0 +1,70 @@
+const int rWS = 32, gWS = 26, yWS = 12, rWP = 23, yWP = 5, gWP = 21, pinoLdr=15, btnChuva=19; 
+int sinalLdr;
+
+void setup() {
+  pinMode(rWS, OUTPUT);
+  pinMode(gWS, OUTPUT);
+  pinMode(yWS, OUTPUT);
+  pinMode(rWP, OUTPUT);
+  pinMode(gWP, OUTPUT);
+  pinMode(yWP, OUTPUT);
+  Serial.println("Monitor Serial");
+  pinMode(pinoLdr, INPUT);
+  pinMode(btnChuva, INPUT);
+}
+
+void loop() {
+ sinalLdr = analogRead(pinoLdr);
+ if((sinalLdr>680) && (btnChuva == HIGH)){
+ semWS(0,0,1);
+ semWP(1,0,0);
+ delay(2000);
+ semWS(0,1,0);
+ semWP(1,0,0);
+ delay(1500);
+ semWS(1,0,0);
+ semWP(1,0,0);
+ delay(500);
+ semWS(1,0,0);
+ semWP(0,0,1);
+ delay(9000);
+ semWS(1,0,0);
+ semWP(0,1,0);
+ delay(1500);
+ semWS(1,0,0);
+ semWP(1,0,0);
+ delay(500);
+}
+else{
+ semWS(0,0,1);
+ semWP(1,0,0);
+ delay(8000);
+ semWS(0,1,0);
+ semWP(1,0,0);
+ delay(1500);
+ semWS(1,0,0);
+ semWP(1,0,0);
+ delay(500);
+ semWS(1,0,0);
+ semWP(0,0,1);
+ delay(8000);
+ semWS(1,0,0);
+ semWP(0,1,0);
+ delay(1500);
+ semWS(1,0,0);
+ semWP(1,0,0);
+ delay(500);
+}
+}
+
+void semWS(bool red, bool yellow, bool green) {
+  digitalWrite(rWS, red);
+  digitalWrite(yWS, yellow);
+  digitalWrite(gWS, green);
+}
+
+void semWP(bool red, bool yellow, bool green){
+  digitalWrite(rWP, red);
+  digitalWrite(yWP, yellow);
+  digitalWrite(gWP, green);
+}
