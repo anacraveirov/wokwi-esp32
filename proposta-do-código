@@ -1,0 +1,9 @@
+Considere o semáforo do cruzamento da Av. Washington Soares com rua Walmir Pontes
+(esquina da Unifor).
+1) Simule o funcionamento dos semáforos ali presentes.
+2) Acrescento dois sensores ao sistema: um sensor de chuva com saída digital e um
+sensor luminoso com saída analógica.
+3) O semáforo deve aumentar o tempo de passagem de veículos quando o dia tiver
+chuvoso.
+4) O dia só será considerado chuvoso se o sensor de chuva estiver molhado e o tempo
+estiver escuro. 
