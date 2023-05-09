@@ -1,0 +1,75 @@
+const int segA = 32, segB = 33, segC = 25, segD = 26;
+const int segE = 27, segF = 14, segG = 12; 
+const int btn = 19;
+int dig;
+char number;
+bool btnState;
+int count = 0;
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(btn, INPUT_PULLUP);
+  
+  //setup dos pinos do display
+  displayBegin();
+}
+
+int lastState = HIGH;
+
+void loop() {
+  delay(120);
+  btnState = digitalRead(btn);
+
+  if(btnState == LOW){
+    count++;
+
+    if(count == 1){
+      displayOn(0,1,1,0,0,0,0);
+    }
+    else if(count == 2){
+      displayOn(1,1,0,1,1,0,1);
+    }
+    else if(count == 3){
+      displayOn(1,1,1,1,0,0,1);
+    }
+    else if(count == 4){
+       displayOn(0,1,1,0,0,1,1);
+    }
+    else if(count == 5){
+      displayOn(1,0,1,1,0,1,1);
+    }
+   else if(count == 6){
+      displayOn(1,0,1,1,1,1,1);
+    }
+    else if(count == 7){
+      displayOn(1,1,1,0,0,0,0); 
+    }
+    else if(count == 8){
+      displayOn(1,1,1,1,1,1,1);
+    }
+    else if(count ==9){
+      displayOn(1,1,1,0,0,1,1);
+    }
+   }
+    }
+
+void displayBegin(){
+  pinMode(segA, OUTPUT);
+  pinMode(segB, OUTPUT);
+  pinMode(segC, OUTPUT);
+  pinMode(segD, OUTPUT);
+  pinMode(segE, OUTPUT);
+  pinMode(segF, OUTPUT);
+  pinMode(segG, OUTPUT);
+
+}
+
+void displayOn(bool onA, bool onB, bool onC, bool onD, bool onE, bool onF, bool onG){
+  digitalWrite(segA,onA);
+  digitalWrite(segB,onB);
+  digitalWrite(segC,onC);
+  digitalWrite(segD,onD);
+  digitalWrite(segE,onE);
+  digitalWrite(segF,onF);
+  digitalWrite(segG,onG);
+}
