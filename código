@@ -1,0 +1,78 @@
+const int segA = 32, segB = 33, segC = 25, segD = 26;
+const int segE = 27, segF = 14, segG = 12;
+int dig;
+char number;
+
+void setup() {
+  Serial.begin(115200);
+  Serial.println("Diga um número");
+  //setup dos pinos do display
+  displayBegin();
+}
+
+void loop() {
+  if(Serial.available()>0){
+    number = Serial.read();
+  }
+
+  if(number == '0'){
+  displayOn(1,1,1,1,1,1,0);//zero
+  }
+
+  if(number == '1'){
+  displayOn(0,1,1,0,0,0,0);//um
+  }
+  
+  if(number == '2'){
+  displayOn(1,1,0,1,1,0,1);//dois
+  }
+
+  if(number == '3'){
+  displayOn(1,1,1,1,0,0,1);//três
+  }
+
+  if(number == '4'){
+  displayOn(0,1,1,0,0,1,1);//quatro
+  }
+  
+  if(number == '5'){
+  displayOn(1,0,1,1,0,1,1);//cinco
+  }
+
+  if(number =='6'){
+  displayOn(1,0,1,1,1,1,1); //seis
+  }
+
+  if(number == '7'){
+  displayOn(1,1,1,0,0,0,0); //sete
+  }
+
+  if(number == '8'){
+  displayOn(1,1,1,1,1,1,1); //oito
+  }
+
+  if(number == '9'){
+  displayOn(1,1,1,0,0,1,1); //nove
+  }
+}
+
+void displayBegin(){
+  pinMode(segA, OUTPUT);
+  pinMode(segB, OUTPUT);
+  pinMode(segC, OUTPUT);
+  pinMode(segD, OUTPUT);
+  pinMode(segE, OUTPUT);
+  pinMode(segF, OUTPUT);
+  pinMode(segG, OUTPUT);
+
+}
+
+void displayOn(bool onA, bool onB, bool onC, bool onD, bool onE, bool onF, bool onG){
+  digitalWrite(segA,onA);
+  digitalWrite(segB,onB);
+  digitalWrite(segC,onC);
+  digitalWrite(segD,onD);
+  digitalWrite(segE,onE);
+  digitalWrite(segF,onF);
+  digitalWrite(segG,onG);
+}
