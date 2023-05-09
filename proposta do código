@@ -1,0 +1,15 @@
+Cenário Problema: Estacionamento
+Considere o estacionamento do Shopping Iguatemi de Fortaleza
+1) Simule a cancela de entrada do estacionamento.
+2) Simule o sensor de uma vaga de estacionamento.
+3) Simule um contador de carros utilizando um único display de 7-segmentos.
+Detalhes do hardware de simulação:
+A cancela será simulada por um servo motor.
+O sensor que libera o cartão pode ser simulado no Wokwi por um Push Button. Use um push
+button para entrada e outro para a saída.
+Sempre que um carro entrar incremente um contador de carros e sempre que um carro sair,
+decremente.
+Mostre o valor da contagem no display de 7-segmentos, limitado ao máximo de 9 carros e
+mínimo de 0.
+O sensor que detectada o carro na vaga deve ser um sensor Ultrassônico.
+Para as luzes que indicam vaga livre ou ocupada, utilizar led verde e vermelho. 
