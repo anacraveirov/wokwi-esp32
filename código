@@ -1,0 +1,181 @@
+#include<ESP32Servo.h>
+
+const int segA = 32, segB = 33, segC = 25, segD = 26; // display
+const int segE = 27, segF = 14, segG = 12; 
+const int btnV = 19; // começo dos botoes
+bool btnVState;
+const int btnA = 18;
+bool btnAState;
+const int pinServo1 = 13; // aq começa os servo
+Servo cancela1;
+const int pinServo2 = 5;
+Servo cancela2;
+const int pTRIG = 4;  // sensor 
+const int pECHO = 2;
+int lastDuration = -1;
+const int red = 23, green = 21; // luzes
+int dig; // random
+char number;
+int count = 0;
+int lastState = HIGH;
+
+void setup() {
+  Serial.begin(115200);
+  displayBegin(); 
+  pinMode(btnV, INPUT_PULLUP); // botoes
+  pinMode(btnA, INPUT_PULLUP);
+  cancela1.attach(pinServo1); // cancelas
+  cancela2.attach(pinServo2);
+  pinMode(pTRIG, OUTPUT); // sensor
+  pinMode(pECHO, INPUT);
+  pinMode(red, OUTPUT); // luzes
+  pinMode(green, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(pTRIG, HIGH);
+  delay(120);
+  btnVState = digitalRead(btnV);
+  btnAState = digitalRead(btnA);
+  cancela1.write(0);
+  cancela2.write(0);
+
+
+  if(btnVState == LOW){
+    count++;
+
+    if(count == 1){
+      displayOn(0,1,1,0,0,0,0);
+      cancela1.write(90);
+      delay(80);
+    }
+    else if(count == 2){
+      displayOn(1,1,0,1,1,0,1);
+      cancela1.write(90);
+      delay(80);
+    }
+    else if(count == 3){
+      displayOn(1,1,1,1,0,0,1);
+      cancela1.write(90);
+      delay(80);
+    }
+    else if(count == 4){
+       displayOn(0,1,1,0,0,1,1);
+       cancela1.write(90);
+       delay(80);
+    }
+    else if(count == 5){
+      displayOn(1,0,1,1,0,1,1);
+      cancela1.write(90);
+      delay(80);
+    }
+   else if(count == 6){
+      displayOn(1,0,1,1,1,1,1);
+      cancela1.write(90);
+      delay(80);
+    }
+    else if(count == 7){
+      displayOn(1,1,1,0,0,0,0); 
+      cancela1.write(90);
+      delay(80);
+    }
+    else if(count == 8){
+      displayOn(1,1,1,1,1,1,1);
+      cancela1.write(90);
+      delay(80);
+    }
+    else if(count ==9){
+      displayOn(1,1,1,0,0,1,1);
+      cancela1.write(90);
+      delay(80);
+    }
+   }
+   if(btnAState == LOW){
+    count--;
+    
+    if(count == 0){
+      displayOn(1,1,1,1,1,1,0);
+      cancela2.write(90);
+    }
+
+    if(count == 1){
+      displayOn(0,1,1,0,0,0,0);
+      cancela2.write(90);
+      delay(80);
+    }
+    else if(count == 2){
+      displayOn(1,1,0,1,1,0,1);
+      cancela2.write(90);
+      delay(80);
+    }
+    else if(count == 3){
+      displayOn(1,1,1,1,0,0,1);
+      cancela2.write(90);
+      delay(80);
+    }
+    else if(count == 4){
+       displayOn(0,1,1,0,0,1,1);
+       cancela2.write(90);
+       delay(80);
+    }
+    else if(count == 5){
+      displayOn(1,0,1,1,0,1,1);
+      cancela2.write(90);
+      delay(80);
+    }
+   else if(count == 6){
+      displayOn(1,0,1,1,1,1,1);
+      cancela2.write(90);
+      delay(80);
+    }
+    else if(count == 7){
+      displayOn(1,1,1,0,0,0,0); 
+      cancela2.write(90);
+      delay(80);
+    }
+    else if(count == 8){
+      displayOn(1,1,1,1,1,1,1);
+      cancela1.write(90);
+      delay(80);
+    }
+    else if(count == 9){
+      displayOn(1,1,1,0,0,1,1);
+      cancela2.write(90);
+      delay(80);
+    }
+   }
+   digitalWrite(pTRIG, LOW);
+   int duration = pulseIn(pECHO, HIGH);
+   
+  if((duration - lastDuration) >5 || (lastDuration - duration) >5){
+    if(int(duration / 58.8) == 400){
+    digitalWrite(green, HIGH);
+    digitalWrite(red, LOW);
+   }
+  }
+   if(int(duration / 58.8) != 400){
+    digitalWrite(red, HIGH);
+    digitalWrite(green, LOW);
+   }
+    }
+
+void displayBegin(){
+  pinMode(segA, OUTPUT);
+  pinMode(segB, OUTPUT);
+  pinMode(segC, OUTPUT);
+  pinMode(segD, OUTPUT);
+  pinMode(segE, OUTPUT);
+  pinMode(segF, OUTPUT);
+  pinMode(segG, OUTPUT);
+
+}
+
+void displayOn(bool onA, bool onB, bool onC, bool onD, bool onE, bool onF, bool onG){
+  digitalWrite(segA,onA);
+  digitalWrite(segB,onB);
+  digitalWrite(segC,onC);
+  digitalWrite(segD,onD);
+  digitalWrite(segE,onE);
+  digitalWrite(segF,onF);
+  digitalWrite(segG,onG);
+}
